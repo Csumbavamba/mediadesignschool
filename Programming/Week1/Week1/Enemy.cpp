@@ -40,9 +40,10 @@ void Enemy::SetName(const char * newName)
 	strncpy_s(name, newName, MAXIMUM_CHARACTERS);
 }
 
+
 void Enemy::Attack() const
 {
-	std::cout << "Enemy attacks!" << std::endl;
+	std::cout << "Enemy Attacks!" << std::endl;
 }
 
 int Enemy::GetHitPoints() const

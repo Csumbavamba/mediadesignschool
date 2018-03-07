@@ -20,6 +20,12 @@ Werewolf::~Werewolf()
 {
 	std::cout << "Werewolf destructor invoked" << std::endl;
 }
+/*
+void Werewolf::Attack()
+{
+	std::cout << "Werewolf Attacked!" << std::endl;
+}
+*/
 
 int Werewolf::GetBiteDamage() const
 {

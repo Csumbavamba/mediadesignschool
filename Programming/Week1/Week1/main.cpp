@@ -4,6 +4,36 @@
 #include "Werewolf.h"
 #include "Human.h"
 
+void TestDynamicCast(Enemy * enemy)
+{
+	// if castable it will return a true
+	Human * human = dynamic_cast<Human*>(enemy);
+
+	if (human)
+	{
+		std::cout << "human passed in" << std::endl;
+
+		human->SetMagicDamage(500);
+	}
+	else
+	{
+		std::cout << "NOT A HUMAN!" << std::endl;
+	}
+
+	Werewolf * werewolf = dynamic_cast<Werewolf*>(enemy);
+
+	if (werewolf)
+	{
+		std::cout << "Werewolf passed in" << std::endl;
+
+		werewolf->SetBiteDamage(600);
+	}
+	else
+	{
+		std::cout << "NOT A WEREWOLF!" << std::endl;
+	}
+}
+
 int main()
 {
 	const int MAX_BADDIES = 10;
@@ -21,6 +51,9 @@ int main()
 	baddies[7] = new Human("Snake", 12, 50, 110, 12);     
 	baddies[8] = new Human("Luke", 9, 50, 110, 13);     
 	baddies[9] = new Human("Duke", 8, 50, 110, 13);
+
+	TestDynamicCast(baddies[1]);
+	TestDynamicCast(baddies[5]);
 
 	for (int i = 0; i < MAX_BADDIES; i++)
 	{

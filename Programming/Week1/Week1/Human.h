@@ -13,6 +13,8 @@ public:
 	Human(const char * name, int hitPoints, int experience, int pulse, int magicDamage);
 	virtual ~Human();
 
+	// virtual void Attack();
+
 	int GetMagicDamage() const;
 	void SetMagicDamage(int newMagicDamage);
 	virtual void Type();

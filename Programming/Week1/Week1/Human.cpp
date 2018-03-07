@@ -22,6 +22,13 @@ Human::~Human()
 	std::cout << "Human destructor invoked" << std::endl;
 }
 
+/*
+void Human::Attack()
+{
+	std::cout << "Human attacked!" << std::endl;
+}
+*/
+
 int Human::GetMagicDamage() const
 {
 	return magicDamage;

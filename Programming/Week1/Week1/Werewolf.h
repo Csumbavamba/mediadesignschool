@@ -13,6 +13,8 @@ public:
 	Werewolf(const char * name, int hitPoints, int experience, int pulse, int biteDamage);
 	virtual ~Werewolf();
 
+	// virtual void Attack();
+
 	int GetBiteDamage() const;
 	void SetBiteDamage(int newBiteDamage);
 	void Type();
