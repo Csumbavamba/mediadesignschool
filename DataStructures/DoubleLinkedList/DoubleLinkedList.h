@@ -1,16 +1,13 @@
-#ifndef _SINGLE_LINKEDLIST_H__
-#define _SINGLE_LINKEDLIST_H__
-
+#pragma once
 #include "CNode.h"
 
-class SingleLinkedList{
-
+class DoubleLinkedList
+{
 private:
 	CNode *root;
-		
 public:
-	 SingleLinkedList();
-	~SingleLinkedList();
+	DoubleLinkedList();
+	~DoubleLinkedList();
 
 	void InsertAtTheFront(int value);
 
@@ -25,4 +22,3 @@ public:
 	void Display();
 };
 
-#endif
