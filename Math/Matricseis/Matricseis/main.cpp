@@ -1,8 +1,10 @@
-#include "Matrix.h"
 #include <iostream>
+#include "Matrix3.h"
+#include "Vector2.h"
 
+#define PI 3.14159265
 
-void DisplayMatrix(Matrix * matrix)
+void DisplayMatrix(Matrix3 * matrix)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -15,28 +17,31 @@ void DisplayMatrix(Matrix * matrix)
 	std::cout << std::endl;
 
 }
+void GenerateMatrix(Matrix3 * matrix)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			matrix->SetElement(i, j, (i + j));
+		}
+	}
+	matrix->SetElement(0, 0, 1);
+}
 
 
 int main()
 {
 	
-	Matrix testMatrix, secondMatrix;
+	Matrix3 testMatrix, secondMatrix;
 
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			testMatrix.SetElement(i, j, (i+j));
-			secondMatrix.SetElement(i, j, (2* i + j));
-		}
-	}
-	testMatrix.SetElement(0, 0, 1);
-	secondMatrix.SetElement(0, 0, 1);
+	GenerateMatrix(&testMatrix);
+	GenerateMatrix(&secondMatrix);
 
-	DisplayMatrix(&testMatrix);
-	DisplayMatrix(&secondMatrix);
+	// DisplayMatrix(&testMatrix);
+	// DisplayMatrix(&secondMatrix);
 	
-
+	// Testing Equal
 	/*if (Matrix::isEqual(testMatrix, secondMatrix))
 	{
 		std::cout << "They are equal!";
@@ -49,39 +54,26 @@ int main()
 	}
 	*/
 
-	// Matrix addedMatricies = Matrix::AddMatricies(testMatrix, secondMatrix);
-
-	// DisplayMatrix(&addedMatricies);
-
-	// Matrix subtractedMatrix = Matrix::SubtractMatricies(testMatrix, secondMatrix);
-	// DisplayMatrix(&subtractedMatrix);
-
-	// testMatrix = Matrix::MultiplyByScalar(3, testMatrix);
-	// DisplayMatrix(&testMatrix);
-
-	// testMatrix = Matrix::MultiplyByMatrix(testMatrix, secondMatrix);
-	// DisplayMatrix(&testMatrix);
-
-	// secondMatrix = Matrix::TransposeMatrix(secondMatrix);
-	// DisplayMatrix(&secondMatrix);
-
+	// Testing matrix functionalities (add, subtract, multiply, transpose
 	/*
-	testMatrix = Matrix::CreateZeroMatrix(testMatrix);
+	Matrix3 addedMatricies = Matrix3::AddMatricies(testMatrix, secondMatrix);
 
-	Matrix inverseMatrix;
+	DisplayMatrix(&addedMatricies);
 
-	if (Matrix::GetInverse(testMatrix, inverseMatrix))
-	{
-		std::cout << "The inverse matrix elements are: " << std::endl;
-		DisplayMatrix(&inverseMatrix);
-	}
-	else
-	{
-		std::cout << "Inverse is not possible " << std::endl;
-	}
+	Matrix3 subtractedMatrix = Matrix3::SubtractMatricies(testMatrix, secondMatrix);
+	DisplayMatrix(&subtractedMatrix);
+
+	testMatrix = Matrix3::MultiplyByScalar(3, testMatrix);
+	DisplayMatrix(&testMatrix);
+
+	testMatrix = Matrix3::MultiplyByMatrix(testMatrix, secondMatrix);
+	DisplayMatrix(&testMatrix);
+
+	secondMatrix = Matrix3::TransposeMatrix(secondMatrix);
+	DisplayMatrix(&testMatrix);
 	*/
 
-	// Testing Clamp
+	//Testing Clamp
 	/*
 	int row = 4;
 	int column = 3;
@@ -92,10 +84,10 @@ int main()
 	*/
 
 	// Testing new inverse
-	
-	Matrix inverseMatrix;
+	/*
+	Matrix3 inverseMatrix;
 
-	if (Matrix::GetInverse(testMatrix, inverseMatrix))
+	if (Matrix3::GetInverse(testMatrix, inverseMatrix))
 	{
 		std::cout << "The inverse matrix elements are: " << std::endl;
 		DisplayMatrix(&inverseMatrix);
@@ -104,7 +96,7 @@ int main()
 	{
 		std::cout << "Inverse is not possible " << std::endl;
 	}
-	
+	*/
 
 	/*
 	Matrix CofactorMatrix;
@@ -128,8 +120,35 @@ int main()
 	DisplayMatrix(&transposeMatrix);
 	
 	*/
-	int wait;
-	std::cin >> wait;
+
+	Vector2 rotationVector(0, 1);
+	Matrix3::Rotate2D(90, rotationVector);
+
+	rotationVector.DisplayVector2();
+
+	system("pause");
+
+	// Testing vector (Translate, Scale, Skew)
+	/*
+	Vector2 testVertex(1, 1);
+	Matrix3::TranslateVector2(2, 4, testVertex);
+
+	testVertex.DisplayVector2();
+
+	system("pause");
+
+	Vector2 skewTest(3, 5);
+
+	Matrix3::ScaleVector2(2, testVertex);
+	testVertex.DisplayVector2();
+
+	std::cout << std::endl;
+
+	Matrix3::SkewVector2(2, 3, skewTest);
+	skewTest.DisplayVector2();
+
+	system("pause");
+	*/
 
 	return 0;
 }

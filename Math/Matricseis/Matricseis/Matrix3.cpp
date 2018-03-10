@@ -1,29 +1,34 @@
-#include "Matrix.h"
+#include <math.h>
+#include <iostream>
+
+#include "Matrix3.h"
+#include "Vector2.h"
+
+#define PI 3.14159265
 
 
-
-Matrix::Matrix()
+Matrix3::Matrix3()
 {
 }
 
 
-Matrix::~Matrix()
+Matrix3::~Matrix3()
 {
 }
 
-float Matrix::GetElement(int matrixRow, int matrixColumn) const
+float Matrix3::GetElement(int matrixRow, int matrixColumn) const
 {
 	return matrix[matrixRow][matrixColumn];
 }
 
-void Matrix::SetElement(int matrixRow, int matrixColumn, float newValue) 
+void Matrix3::SetElement(int matrixRow, int matrixColumn, float newValue) 
 {
 	matrix[matrixRow][matrixColumn] = newValue;
 }
 
 
 
-Matrix & Matrix::CreateIdentityMatrix(Matrix& identityMatrix)
+Matrix3 & Matrix3::CreateIdentityMatrix(Matrix3& identityMatrix)
 {
 	/*
 		1 0 0
@@ -50,7 +55,7 @@ Matrix & Matrix::CreateIdentityMatrix(Matrix& identityMatrix)
 	return identityMatrix;
 }
 
-Matrix & Matrix::CreateZeroMatrix(Matrix& zeroMatrix)
+Matrix3 & Matrix3::CreateZeroMatrix(Matrix3& zeroMatrix)
 {
 	/*
 	0 0 0
@@ -71,7 +76,7 @@ Matrix & Matrix::CreateZeroMatrix(Matrix& zeroMatrix)
 
 }
 
-bool Matrix::isEqual(const Matrix & matrixA, const Matrix & matrixB)
+bool Matrix3::isEqual(const Matrix3 & matrixA, const Matrix3 & matrixB)
 {
 	// check every corresponding element of matrixA and matrixB
 	for (int row = 0; row < 3; row++)
@@ -89,9 +94,9 @@ bool Matrix::isEqual(const Matrix & matrixA, const Matrix & matrixB)
 	return true;
 }
 
-Matrix &Matrix::AddMatricies(const Matrix & matrixA, const Matrix & matrixB)
+Matrix3 &Matrix3::AddMatricies(const Matrix3 & matrixA, const Matrix3 & matrixB)
 {
-	Matrix addedMatrix;
+	Matrix3 addedMatrix;
 	int addedValue;
 
 	// Iterate through the elements of the new matrix
@@ -110,9 +115,9 @@ Matrix &Matrix::AddMatricies(const Matrix & matrixA, const Matrix & matrixB)
 
 }
 
-Matrix &Matrix::SubtractMatricies(const Matrix & matrixA, const Matrix & matrixB)
+Matrix3 &Matrix3::SubtractMatricies(const Matrix3 & matrixA, const Matrix3 & matrixB)
 {
-	Matrix subtractedMatrix;
+	Matrix3 subtractedMatrix;
 	int subtractedValue;
 
 	// Iterate through the elements of the new matrix
@@ -130,10 +135,10 @@ Matrix &Matrix::SubtractMatricies(const Matrix & matrixA, const Matrix & matrixB
 	return subtractedMatrix;
 }
 
-Matrix & Matrix::MultiplyByScalar(float scalarNumber, const Matrix & matrix)
+Matrix3 & Matrix3::MultiplyByScalar(float scalarNumber, const Matrix3 & matrix)
 {
 	// TODO: insert return statement here
-	Matrix multipliedMatrix;
+	Matrix3 multipliedMatrix;
 
 	// Iterate through the elements of the new matrix
 	for (int row = 0; row < 3; row++)
@@ -149,7 +154,7 @@ Matrix & Matrix::MultiplyByScalar(float scalarNumber, const Matrix & matrix)
 
 
 
-Matrix & Matrix::MultiplyByMatrix(const Matrix & matrixA, const Matrix & matrixB)
+Matrix3 & Matrix3::MultiplyByMatrix(const Matrix3 & matrixA, const Matrix3 & matrixB)
 {
 	// TODO: insert return statement here
 
@@ -157,7 +162,7 @@ Matrix & Matrix::MultiplyByMatrix(const Matrix & matrixA, const Matrix & matrixB
 		|a b|	|e	f|	=	|ae + bg	af + bh|	A	[0][0]	[0][1]			B	[0][0]	[0][1]		NEW		|A[0][0] * B[0][0] + A[0][1] * B[1][0]	A[0][0] * B[0][1] + A[0][1] * B[1][1]|
 		|c d|	|g	h|		|ce + dg	cf + dh|		[1][0]	[1][1]				[1][0]	[1][1]				|A[1][0] * B[0][0] + A[1][1] * B[1][0]	A[1][0] * B[0][1] + A[1][1] * B[1][1]|
 	*/
-	Matrix multipliedMatrix;
+	Matrix3 multipliedMatrix;
 	int multipliedElementValue;
 
 	for (int row = 0; row < 3; row++)
@@ -177,7 +182,7 @@ Matrix & Matrix::MultiplyByMatrix(const Matrix & matrixA, const Matrix & matrixB
 
 }
 
-Matrix & Matrix::TransposeMatrix(const Matrix& matrix)
+Matrix3 & Matrix3::TransposeMatrix(const Matrix3& matrix)
 {
 	// TODO: insert return statement here
 	/*
@@ -185,7 +190,7 @@ Matrix & Matrix::TransposeMatrix(const Matrix& matrix)
 		e f g	->	b f i
 		h i j		c g j
 	*/
-	Matrix transposedMatrix;
+	Matrix3 transposedMatrix;
 	int transposedValue;
 
 	// Iterate through the elements of the new matrix
@@ -203,7 +208,7 @@ Matrix & Matrix::TransposeMatrix(const Matrix& matrix)
 
 }
 
-float Matrix::CalculateDeterminant(const Matrix& matrix)
+float Matrix3::CalculateDeterminant(const Matrix3& matrix)
 {
 	float determinant;
 
@@ -214,11 +219,11 @@ float Matrix::CalculateDeterminant(const Matrix& matrix)
 	return determinant;
 }
 
-bool Matrix::GetInverse(const Matrix & matrix, Matrix & inverseMatrix)
+bool Matrix3::GetInverse(const Matrix3 & matrix, Matrix3 & inverseMatrix)
 {
 	if (matrix.CalculateDeterminant(matrix) != 0)
 	{
-		Matrix CofactorMatrix;
+		Matrix3 CofactorMatrix;
 
 		// Calculate Cofactor matrix elements
 		for (int row = 0; row < 3; row++)
@@ -248,7 +253,7 @@ bool Matrix::GetInverse(const Matrix & matrix, Matrix & inverseMatrix)
 	return false;
 }
 
-float Matrix::CalculateCofactor(const Matrix & matrix, int matrixRow, int matrixColumn)
+float Matrix3::CalculateCofactor(const Matrix3 & matrix, int matrixRow, int matrixColumn)
 {
 	int cofactor;
 
@@ -258,7 +263,7 @@ float Matrix::CalculateCofactor(const Matrix & matrix, int matrixRow, int matrix
 	return cofactor;
 }
 
-int Matrix::Clamp(int position)
+int Matrix3::Clamp(int position)
 {
 	/*
 	1:					2:								3:
@@ -283,10 +288,74 @@ int Matrix::Clamp(int position)
 
 
 
+// Section 2 - Linear Transformations (2D transforms)
+
+void Matrix3::TranslateVector2(int translateX, int translateY, Vector2& vertex)
+{
+	/*
+		1 0 0						1 0 translateX
+		0 1 0				-->		0 1 translateY   
+		0 0 1 - NOT USED			0 0 1
+
+	*/
 
 
 
-bool Matrix::TestHarness()
+	Matrix3 translatedMatrix = CreateIdentityMatrix(translatedMatrix);
+
+	translatedMatrix.SetElement(0, 2, translateX);
+	translatedMatrix.SetElement(1, 2, translateY);
+
+	// Do the translation
+	vertex.SetX(translatedMatrix.GetElement(0, 2) + vertex.GetX());
+	vertex.SetY(translatedMatrix.GetElement(1, 2) + vertex.GetY());
+
+	return;
+}
+
+void Matrix3::ScaleVector2(int scale, Vector2 & vertex)
+{
+	SkewVector2(scale, scale, vertex);
+
+	return;
+}
+
+void Matrix3::SkewVector2(int scaleX, int scaleY, Vector2 & vertex)
+{
+	// Prepare for scaling
+	/*
+	1 0 0						scaleX	0		0
+	0 1 0				-->		0		scaleY	0
+	0 0 1 - NOT USED			0		0		1
+
+	*/
+
+	Matrix3 scaledMatrix = CreateIdentityMatrix(scaledMatrix);
+
+	scaledMatrix.SetElement(0, 0, scaleX);
+	scaledMatrix.SetElement(1, 1, scaleY);
+
+	// Do the scaling
+	vertex.SetX(vertex.GetX() * scaledMatrix.GetElement(0, 0));
+	vertex.SetY(vertex.GetY() * scaledMatrix.GetElement(1, 1));
+
+	return;
+}
+
+void Matrix3::Rotate2D(int degrees, Vector2 & vertex)
+{
+	int tempX = vertex.GetX();
+	int tempY = vertex.GetY();
+	
+	// TODO fix functions
+	vertex.SetX(tempX * cos(degrees * PI / 180) - tempY * sin(degrees * PI / 180));
+	vertex.SetY(tempX * sin(degrees * PI / 180) + tempY * cos(degrees * PI / 180));
+
+}
+
+
+
+bool Matrix3::TestHarness()
 {
 	return false;
 }
