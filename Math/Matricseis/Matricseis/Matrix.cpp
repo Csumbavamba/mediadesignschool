@@ -207,40 +207,31 @@ float Matrix::CalculateDeterminant(const Matrix& matrix)
 {
 	float determinant;
 
-	determinant =	(matrix.GetElement(0, 0) * ((matrix.GetElement(1, 1) * matrix.GetElement(2, 2)) - (matrix.GetElement(2, 2) * matrix.GetElement(3, 2))))
-				-	(matrix.GetElement(0, 1) * ((matrix.GetElement(1, 0) * matrix.GetElement(3, 3)) - (matrix.GetElement(2, 2) * matrix.GetElement(0, 2))))
-				+	(matrix.GetElement(0, 2) * ((matrix.GetElement(1, 0) * matrix.GetElement(2, 1)) - (matrix.GetElement(1, 1) * matrix.GetElement(2, 0))));
+	determinant =	matrix.GetElement(0, 0)		*	(((matrix.GetElement(1, 1) * matrix.GetElement(2, 2)) - (matrix.GetElement(1, 2) * matrix.GetElement(2, 1))))
+				+	(-1* matrix.GetElement(0, 1)) *	(((matrix.GetElement(1, 0) * matrix.GetElement(2, 2)) - (matrix.GetElement(2, 0) * matrix.GetElement(1, 2))))
+				+	matrix.GetElement(0, 2)		*	(((matrix.GetElement(1, 0) * matrix.GetElement(2, 1)) - (matrix.GetElement(1, 1) * matrix.GetElement(2, 0))));
 
 	return determinant;
 }
 
-bool Matrix::GetInverse(const Matrix & matrix, Matrix& inverseMatrix)
+bool Matrix::GetInverse(const Matrix & matrix, Matrix & inverseMatrix)
 {
-	/*
-		|1|	 2	 3
-		 4	(5)	(6)
-		 7	(8)	(9)
-
-		 if (row == 0 && column == 1)
-		 GetElement (1,0 2,2 1,2 2,0)	
-	*/
-
 	if (matrix.CalculateDeterminant(matrix) != 0)
 	{
 		Matrix CofactorMatrix;
 
-		// calculate the cofactor values of the matrix
-		CofactorMatrix.SetElement(0, 0,		(matrix.GetElement(1, 1) * matrix.GetElement(2, 2)) - (matrix.GetElement(1, 2) * matrix.GetElement(2, 1)));
-		CofactorMatrix.SetElement(0, 1,	(-1*(matrix.GetElement(1, 0) * matrix.GetElement(2, 2)) - (matrix.GetElement(2, 0) * matrix.GetElement(1, 2))));
-		CofactorMatrix.SetElement(0, 2,		(matrix.GetElement(1, 0) * matrix.GetElement(2, 1)) - (matrix.GetElement(2, 0) * matrix.GetElement(1, 1)));
-		CofactorMatrix.SetElement(1, 0, (-1*(matrix.GetElement(0, 1) * matrix.GetElement(2, 2)) - (matrix.GetElement(0, 2) * matrix.GetElement(2, 1))));
-		CofactorMatrix.SetElement(1, 1,		(matrix.GetElement(0, 0) * matrix.GetElement(2, 2)) - (matrix.GetElement(0, 2) * matrix.GetElement(2, 0)));
-		CofactorMatrix.SetElement(1, 2, (-1*(matrix.GetElement(0, 0) * matrix.GetElement(2, 1)) - (matrix.GetElement(0, 1) * matrix.GetElement(2, 0))));
-		CofactorMatrix.SetElement(2, 0,		(matrix.GetElement(0, 1) * matrix.GetElement(1, 2)) - (matrix.GetElement(1, 1) * matrix.GetElement(0, 2)));
-		CofactorMatrix.SetElement(2, 1, (-1*(matrix.GetElement(0, 0) * matrix.GetElement(1, 2)) - (matrix.GetElement(1, 0) * matrix.GetElement(1, 2))));
-		CofactorMatrix.SetElement(2, 2,		(matrix.GetElement(0, 0) * matrix.GetElement(1, 1)) - (matrix.GetElement(1, 0) * matrix.GetElement(0, 1)));
+		// Calculate Cofactor matrix elements
+		for (int row = 0; row < 3; row++)
+		{
+			for (int column = 0; column < 3; column++)
+			{
+				CofactorMatrix.SetElement(row, column, CalculateCofactor(matrix, row, column));
+			}
+		}
+		
 
-		Matrix transposedMatrix = TransposeMatrix(CofactorMatrix);
+		TransposeMatrix(CofactorMatrix);
+
 		float determinant = CalculateDeterminant(matrix);
 
 		// calculate each element of the inverse matrix
@@ -248,15 +239,49 @@ bool Matrix::GetInverse(const Matrix & matrix, Matrix& inverseMatrix)
 		{
 			for (int column = 0; column < 3; column++)
 			{
-				inverseMatrix.SetElement(row, column, (transposedMatrix.GetElement(row, column) / determinant));
+				inverseMatrix.SetElement(row, column, (CofactorMatrix.GetElement(row, column) / determinant));
 			}
 		}
 
 		return true;
 	}
 	return false;
+}
+
+float Matrix::CalculateCofactor(const Matrix & matrix, int matrixRow, int matrixColumn)
+{
+	int cofactor;
+
+	cofactor =			matrix.GetElement(Clamp(matrixRow + 1), Clamp(matrixColumn + 1)) * matrix.GetElement(Clamp(matrixRow + 2), Clamp(matrixColumn + 2))
+				-		matrix.GetElement(Clamp(matrixRow + 2), Clamp(matrixColumn + 1)) * matrix.GetElement(Clamp(matrixRow + 1), Clamp(matrixColumn + 2));
+	
+	return cofactor;
+}
+
+int Matrix::Clamp(int position)
+{
+	/*
+	1:					2:								3:
+		a						a									a
+			b	c			b		c	(clamp)				b	c		(clamp)	(clamp)
+			e	g			e		g	(clamp)				e	g		(clamp)	(clamp)
+
+			SAME GOES VERTICALLY
+
+	*/
+
+	// If position goes through the end of the array, set it to the beginning
+	if (position == 3)
+		position = 0;
+	if (position == 4)
+		position = 1;
+
+	return position;
+
 
 }
+
+
 
 
 

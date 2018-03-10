@@ -19,7 +19,7 @@ void DisplayMatrix(Matrix * matrix)
 
 int main()
 {
-
+	
 	Matrix testMatrix, secondMatrix;
 
 	for (int i = 0; i < 3; i++)
@@ -30,9 +30,12 @@ int main()
 			secondMatrix.SetElement(i, j, (2* i + j));
 		}
 	}
+	testMatrix.SetElement(0, 0, 1);
+	secondMatrix.SetElement(0, 0, 1);
 
 	DisplayMatrix(&testMatrix);
 	DisplayMatrix(&secondMatrix);
+	
 
 	/*if (Matrix::isEqual(testMatrix, secondMatrix))
 	{
@@ -62,6 +65,7 @@ int main()
 	// secondMatrix = Matrix::TransposeMatrix(secondMatrix);
 	// DisplayMatrix(&secondMatrix);
 
+	/*
 	testMatrix = Matrix::CreateZeroMatrix(testMatrix);
 
 	Matrix inverseMatrix;
@@ -75,8 +79,55 @@ int main()
 	{
 		std::cout << "Inverse is not possible " << std::endl;
 	}
+	*/
+
+	// Testing Clamp
+	/*
+	int row = 4;
+	int column = 3;
+
+	Matrix::Clamp(row, column);
+
+	std::cout << row << " " << column;
+	*/
+
+	// Testing new inverse
+	
+	Matrix inverseMatrix;
+
+	if (Matrix::GetInverse(testMatrix, inverseMatrix))
+	{
+		std::cout << "The inverse matrix elements are: " << std::endl;
+		DisplayMatrix(&inverseMatrix);
+	}
+	else
+	{
+		std::cout << "Inverse is not possible " << std::endl;
+	}
+	
+
+	/*
+	Matrix CofactorMatrix;
+
+	for (int row = 0; row < 3; row++)
+	{
+		for (int column = 0; column < 3; column++)
+		{
+			CofactorMatrix.SetElement(row, column, Matrix::CalculateCofactor(testMatrix, row, column));
+		}
+	}
+
+	float determinant = Matrix::CalculateDeterminant(testMatrix);
+	
+	std::cout << determinant << std::endl;
+
+	Matrix transposeMatrix = Matrix::TransposeMatrix(CofactorMatrix);
 
 
+
+	DisplayMatrix(&transposeMatrix);
+	
+	*/
 	int wait;
 	std::cin >> wait;
 

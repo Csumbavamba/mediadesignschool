@@ -23,6 +23,8 @@ public:
 	static Matrix& TransposeMatrix(const Matrix& matrix);
 	static float CalculateDeterminant(const Matrix& matrix);
 	static bool GetInverse(const Matrix& matrix, Matrix& inverseMatrix);
+	static float CalculateCofactor(const Matrix& matrix, int matrixRow, int matrixColumn);
+	static int Clamp(int position);
 	static bool TestHarness();
 
 
