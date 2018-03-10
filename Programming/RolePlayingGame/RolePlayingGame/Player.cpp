@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 
 #include "Player.h"
 #include "random.h"
@@ -197,7 +198,7 @@ bool Player::Attack(Monster & monster)
 	{
 	case 1: // Attacking
 	{
-		std::cout << "You decided to attack an " << monster.GetName() << "with a " << weapon.name << std::endl;
+		std::cout << "You decided to attack an " << monster.GetName() << " with a " << weapon.name << std::endl;
 
 		if (Random(0, 20) < accuracy)
 		{
