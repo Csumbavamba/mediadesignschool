@@ -23,6 +23,8 @@ public:
 	bool Search(int value);
 
 	void Display();
+
+	void TestHarness();
 };
 
 #endif

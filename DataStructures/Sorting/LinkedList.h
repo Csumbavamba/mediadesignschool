@@ -11,6 +11,7 @@ public:
 	int GetData(int position);
 	void SetData(int data, int position);
 	
+	void GenerateRandomArray();
 	void SwapData(int position1, int position2);
 	bool IsListAscending(); // is it sorted
 
@@ -25,5 +26,8 @@ public:
 	
 	// Display
 	void DisplayData();
+
+	void SlowDisplay();
+	void TestHarness();
 };
 

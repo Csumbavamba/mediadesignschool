@@ -16,5 +16,7 @@ public:
 	bool IsEmpty();
 	void PrintStackMembers();
 
+	void TestHarness();
+
 };
 

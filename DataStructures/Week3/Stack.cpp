@@ -77,3 +77,38 @@ void Stack::PrintStackMembers()
 		memberCounter++;
 	}
 }
+
+void Stack::TestHarness()
+{
+	Stack stack;
+
+	std::cout << "Welcome to Stack Tests" << std::endl;
+	std::cout << std::endl;
+	
+
+	stack.Push(1);
+	stack.Push(2);
+	stack.Push(3);
+
+	std::cout << "Pushing in 1, 2, 3" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	stack.PrintStackMembers();
+	std::cout << std::endl;
+
+	std::cout << "Peeking at the first element on the stack" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	stack.Peek();
+
+	system("pause");
+	std::cout << std::endl;
+
+	stack.Pop();
+	std::cout << "Popping." << std::endl;
+	stack.PrintStackMembers();
+
+	system("pause");
+}

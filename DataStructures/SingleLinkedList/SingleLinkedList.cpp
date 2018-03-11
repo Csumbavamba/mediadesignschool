@@ -159,3 +159,58 @@ void SingleLinkedList::Display()
 }
 
 
+void SingleLinkedList::TestHarness()
+{
+	SingleLinkedList testList;
+
+	std::cout << "Welcome to SingleLinkedList TestHarness!" << std::endl;
+	std::cout << std::endl;
+
+	system("pause");
+	std::cout << std::endl;
+
+
+	std::cout << "Inserting 3, 2, 1 at the Front of the list" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	testList.InsertAtTheFront(3);
+	testList.InsertAtTheFront(2);
+	testList.InsertAtTheFront(1);
+	testList.Display();
+	std::cout << std::endl;
+
+	system("pause");
+	std::cout << std::endl;
+
+	std::cout << "Inserting 5 at the end of the list" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+	
+	testList.InsertAtTheEnd(5);
+	testList.Display();
+	std::cout << std::endl;
+
+	system("pause");
+	std::cout << std::endl;
+
+	std::cout << "Inserting 4 at position 4" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	testList.InsertInTheMiddle(4, 4);
+	testList.Display();
+	std::cout << std::endl;
+
+	system("pause");
+	std::cout << std::endl;
+
+	std::cout << "Deleting value 1" << std::endl;
+	testList.Delete(1);
+	testList.Display();
+	std::cout << std::endl;
+
+	system("pause");
+}
+
+

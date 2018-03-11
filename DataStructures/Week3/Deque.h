@@ -17,6 +17,7 @@ public:
 	int PeekAtFront();
 	int PeekAtEnd();
 	bool IsEmpty();
-	void PrintQueueMembers();
+	void PrintDequeMembers();
+	void TestHarness();
 };
 

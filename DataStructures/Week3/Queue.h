@@ -15,6 +15,7 @@ public:
 	int Peek();
 	bool IsEmpty();
 	void PrintQueueMembers();
+	void TestHarness();
 
 };
 

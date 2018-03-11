@@ -120,7 +120,7 @@ bool Deque::IsEmpty()
 	return false;
 }
 
-void Deque::PrintQueueMembers()
+void Deque::PrintDequeMembers()
 {
 	CNode * currentNode = front;
 	int memberCounter = 1;
@@ -133,4 +133,51 @@ void Deque::PrintQueueMembers()
 		currentNode = currentNode->GetPreviousNode();
 		memberCounter++;
 	}
+}
+
+void Deque::TestHarness()
+{
+	Deque deque;
+
+	std::cout << "Welcome to Deque Tests" << std::endl;
+	std::cout << std::endl;
+
+
+	deque.EnqueueAtEnd(1);
+	deque.EnqueueAtEnd(2);
+	deque.EnqueueAtEnd(3);
+	deque.EnqueueAtFront(4);
+
+	std::cout << "Enqueueing - 1, 2, 3 at the end - 4 at front" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	deque.PrintDequeMembers();
+	std::cout << std::endl;
+
+	std::cout << "Peeking part:" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	int peek = deque.PeekAtEnd();
+	std::cout << "Peek at End: " << peek << std::endl;
+
+	peek = deque.PeekAtFront();
+	std::cout << "Peek at Front: " << peek << std::endl;
+
+	system("pause");
+	std::cout << std::endl;
+
+	deque.DequeueAtEnd();
+	std::cout << "Dequeue at End." << std::endl;
+	deque.PrintDequeMembers();
+
+	system("pause");
+	std::cout << std::endl;
+
+	deque.DequeueAtFront();
+	std::cout << "Dequeue at Front." << std::endl;
+	deque.PrintDequeMembers();
+
+	system("pause");
 }

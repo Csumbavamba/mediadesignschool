@@ -85,3 +85,38 @@ void Queue::PrintQueueMembers()
 		memberCounter++;
 	}
 }
+
+void Queue::TestHarness()
+{
+	Queue queue;
+
+	std::cout << "Welcome to Queue Tests" << std::endl;
+	std::cout << std::endl;
+
+
+	queue.Enqueue(1);
+	queue.Enqueue(2);
+	queue.Enqueue(3);
+
+	std::cout << "Enqueueing - 1, 2, 3" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	queue.PrintQueueMembers();
+	std::cout << std::endl;
+
+	std::cout << "Peeking at the first element in queue" << std::endl;
+	system("pause");
+	std::cout << std::endl;
+
+	queue.Peek();
+
+	system("pause");
+	std::cout << std::endl;
+
+	queue.Dequeue();
+	std::cout << "Dequeueing." << std::endl;
+	queue.PrintQueueMembers();
+
+	system("pause");
+}

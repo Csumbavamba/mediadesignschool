@@ -1,5 +1,6 @@
 #include <iostream>
 #include <windows.h>
+#include <time.h>
 
 #include "LinkedList.h"
 
@@ -30,6 +31,17 @@ void LinkedList::SetData(int data, int position)
 }
 
 
+void LinkedList::GenerateRandomArray()
+{
+	int randomNumber;
+
+	for (int i = 0; i < 10; i++)
+	{
+		randomNumber = rand() % 50 + 1;
+		SetData(randomNumber, i);
+	}
+}
+
 void LinkedList::SwapData(int position1, int position2)
 {
 	int temp = list[position1];
@@ -45,7 +57,7 @@ bool LinkedList::IsListAscending()
 	for (int i = 0; i < 9; i++)
 	{
 		// if the list is ascending
-		if (list[i] < list[i + 1])
+		if (list[i] > list[i + 1])
 		{
 			return false;
 		}
@@ -58,12 +70,12 @@ bool LinkedList::IsListAscending()
 void LinkedList::BubbleSort()
 {
 	while (!IsListAscending())
-	{	
+	{
 		// iterate through the list
 		for (int element = 0; element < 9; element++)
 		{
 			// if the one on the right is smaller - swap them
-			if (list[element] < list[element + 1])
+			if (list[element] > list[element + 1])
 			{
 				SwapData(element, element + 1);
 				system("cls");
@@ -81,21 +93,24 @@ void LinkedList::SelectionSort()
 
 	while (!IsListAscending())
 	{
+		currentLargest = 0;
 
 		// Find the largest element
 		for (int listElement = 1; listElement < unsortedData; listElement++)
 		{
 			// if left side is smaller (right is larger)
-			if ((list[currentLargest] < list[listElement]))
+			if ((list[currentLargest] <= list[listElement]))
 			{
 				// set right side to be the largest
 				currentLargest = listElement;
 			}	
 		}
 
-		// Move largest data, to the end of the list
-		SwapData(currentLargest, unsortedData - 1);
-
+		// Move largest data, to the end of the list (if it's not already there)
+		if (currentLargest != unsortedData)
+		{
+			SwapData(currentLargest, unsortedData - 1);
+		}
 		unsortedData--;
 		
 		
@@ -140,8 +155,8 @@ void LinkedList::SelectionSort2()
 
 	} while (!sorted);
 }
-
 */
+
 
 void LinkedList::InsertionSort()
 {
@@ -162,7 +177,7 @@ void LinkedList::InsertionSort()
 		{
 			// If the element is being inserted at the first position 
 			// OR the element has been sorted
-			if (inspectedElement == 0 && list[inspectedElement] > list[lastSortedElement])
+			if (list[inspectedElement] > list[lastSortedElement] || inspectedElement == 0)
 			{
 				isElementInserted = true;
 				elementsSorted++;
@@ -194,4 +209,94 @@ void LinkedList::DisplayData()
 	std::cout << std::endl;
 	Sleep(200);
 
+}
+
+void LinkedList::SlowDisplay()
+{
+	// print out the elements of the array
+	for (int i = 0; i < 10; i++)
+	{
+		std::cout << list[i] << " ";
+		Sleep(200);
+	}
+	std::cout << std::endl;
+}
+
+void LinkedList::TestHarness()
+{
+	srand(time(NULL));
+	LinkedList bubbleTest;
+	LinkedList selectionTest;
+	LinkedList insertionTest;
+
+	bubbleTest.GenerateRandomArray();
+	selectionTest.GenerateRandomArray();
+	insertionTest.GenerateRandomArray();
+
+	std::cout << "Welcome to Sorting TestHarness!" << std::endl;
+	std::cout << std::endl;
+	system("pause");
+	system("cls");
+
+
+	// Test BubbleSort
+
+	std::cout << "Generating array for testing..." << std::endl;
+	std::cout << std::endl;
+	Sleep(2000);
+
+	std::cout << "Testing for Bubble Sort ready!" << std::endl;
+	system("pause");
+	system("cls");
+
+	bubbleTest.SlowDisplay();
+	Sleep(2000);
+	bubbleTest.BubbleSort();
+
+	std::cout << std::endl;
+	std::cout << "Bubble Sorting ready!";
+	std::cout << std::endl;
+	system("pause");
+	system("cls");
+
+
+	// Test SelectionSort
+
+	std::cout << "Generating array for testing..." << std::endl;
+	std::cout << std::endl;
+	Sleep(2000);
+
+	std::cout << "Testing for Selection Sort ready!" << std::endl;
+	system("pause");
+	system("cls");
+
+	selectionTest.SlowDisplay();
+	Sleep(2000);
+	selectionTest.SelectionSort();
+
+	std::cout << std::endl;
+	std::cout << "Selection Sorting ready!";
+	std::cout << std::endl;
+	system("pause");
+	system("cls");
+
+
+	// Test InsertionSort
+
+	std::cout << "Generating array for testing..." << std::endl;
+	std::cout << std::endl;
+	Sleep(2000);
+
+	std::cout << "Testing for Insertion Sort ready!" << std::endl;
+	system("pause");
+	system("cls");
+
+	insertionTest.SlowDisplay();
+	Sleep(2000);
+	insertionTest.InsertionSort();
+
+	std::cout << std::endl;
+	std::cout << "Insertion Sorting ready!";
+	std::cout << std::endl;
+	system("pause");
 }
