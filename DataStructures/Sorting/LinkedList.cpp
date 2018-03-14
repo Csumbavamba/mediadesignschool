@@ -31,17 +31,6 @@ void LinkedList::SetData(int data, int position)
 }
 
 
-void LinkedList::GenerateRandomArray()
-{
-	int randomNumber;
-
-	for (int i = 0; i < 10; i++)
-	{
-		randomNumber = rand() % 50 + 1;
-		SetData(randomNumber, i);
-	}
-}
-
 void LinkedList::SwapData(int position1, int position2)
 {
 	int temp = list[position1];
@@ -119,45 +108,6 @@ void LinkedList::SelectionSort()
 	}
 }
 
-/// SELECTION SORT VERSION 2
-/*
-void LinkedList::SelectionSort2()
-{
-	int unsortedData = 10; // TODO, get list length instead of using magic number
-	int currentLargest = 0;
-
-	bool sorted;
-
-	do
-	{
-		sorted = true;
-		// Find the largest element
-		for (int i = 1; i < unsortedData; i++)
-		{
-			if (list[currentLargest] < list[i])
-			{
-				currentLargest = i;
-			}
-		}
-
-		if (currentLargest < unsortedData - 1)
-		{
-			// swap
-			int temp = list[unsortedData - 1];
-			list[unsortedData - 1] = list[currentLargest];
-			list[currentLargest] = temp;
-			unsortedData--;
-			sorted = false;
-		}
-
-		system("cls"); // TODO, Remove after testing
-		DisplayData(); // TODO, Remove after testing
-
-	} while (!sorted);
-}
-*/
-
-
 void LinkedList::InsertionSort()
 {
 	bool isElementInserted;
@@ -209,6 +159,17 @@ void LinkedList::DisplayData()
 	std::cout << std::endl;
 	Sleep(200);
 
+}
+
+void LinkedList::GenerateRandomArray()
+{
+	int randomNumber;
+
+	for (int i = 0; i < 10; i++)
+	{
+		randomNumber = rand() % 50 + 1;
+		SetData(randomNumber, i);
+	}
 }
 
 void LinkedList::SlowDisplay()
