@@ -18,5 +18,7 @@ public:
 	static void ScaleVector3(int scale, Vector3& vertex);
 	static void SkewVector3(int scaleX, int scaleY, int scaleZ, Vector3& vertex);
 	static void RotateAroundZ(int degrees, Vector3& vertex);
+	static void RotateAroundY(int degrees, Vector3& vertex);
+	static void RotateAroundX(int degrees, Vector3& vertex);
 };
 

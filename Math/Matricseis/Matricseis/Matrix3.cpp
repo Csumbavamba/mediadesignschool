@@ -344,6 +344,11 @@ void Matrix3::SkewVector2(int scaleX, int scaleY, Vector2 & vertex)
 
 void Matrix3::Rotate2D(int degrees, Vector2 & vertex)
 {
+	/*
+		cos	 sin
+		-sin cos
+	*/
+
 	int tempX = vertex.GetX();
 	int tempY = vertex.GetY();
 	

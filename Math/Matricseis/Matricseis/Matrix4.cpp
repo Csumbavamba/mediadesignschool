@@ -1,6 +1,9 @@
+#include <math.h>
+
+#include "Vector3.h"
 #include "Matrix4.h"
 
-
+#define PI 3.14159265
 
 Matrix4::Matrix4()
 {
@@ -109,5 +112,52 @@ void Matrix4::SkewVector3(int scaleX, int scaleY, int scaleZ, Vector3 & vertex)
 
 void Matrix4::RotateAroundZ(int degrees, Vector3 & vertex)
 {
+
+	/*
+		cos		-sin		 0
+		sin		cos		 0 
+		 0		 0		 1
+	*/
+
 	// TODO make function that works
+
+	int tempX = vertex.GetX();
+	int tempY = vertex.GetY();
+
+
+
+	// TODO fix functions
+	vertex.SetX(tempX * cos(degrees * PI / 180) - tempY * sin(degrees * PI / 180));
+	vertex.SetY(tempX * sin(degrees * PI / 180) + tempY * cos(degrees * PI / 180));
+}
+
+void Matrix4::RotateAroundY(int degrees, Vector3 & vertex)
+{
+	/*
+	cos		0		sin
+	0		1		0
+	-sin		0	cos
+	*/
+
+	int tempX = vertex.GetX();
+	int tempZ = vertex.GetZ();
+
+	vertex.SetX(tempX * cos(degrees * PI / 180) + tempZ * sin(degrees * PI / 180));
+	vertex.SetZ(tempZ * cos(degrees * PI / 180) - tempX * sin(degrees * PI / 180));
+}
+
+void Matrix4::RotateAroundX(int degrees, Vector3 & vertex)
+{
+
+	/*
+		1		0		0
+		0		cos		-sin	
+		0		sin		cos	
+	*/
+
+	int tempY = vertex.GetY();
+	int tempZ = vertex.GetZ();
+
+	vertex.SetY(tempY * cos(degrees * PI / 180) - tempZ * sin(degrees * PI / 180));
+	vertex.SetZ(tempY * sin(degrees * PI / 180) + tempZ * cos(degrees * PI / 180));
 }

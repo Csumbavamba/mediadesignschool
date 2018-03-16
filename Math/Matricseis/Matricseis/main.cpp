@@ -121,7 +121,7 @@ int main()
 	
 	*/
 
-	Vector2 rotationVector(0, 1);
+	Vector2 rotationVector(1, 0);
 	Matrix3::Rotate2D(90, rotationVector);
 
 	rotationVector.DisplayVector2();

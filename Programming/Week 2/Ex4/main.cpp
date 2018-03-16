@@ -1,9 +1,10 @@
 #include <iostream>
 #include <conio.h>
 
+
 using namespace std;
 
-template<typename T>
+template<typename T> 
 T** AllocateArrayInFreeStore(int rows, int columns)
 {
 	T** freeStoreArray;
