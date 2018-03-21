@@ -48,27 +48,27 @@ public:
 void PassingByValue(SuperExample instance)
 {
 	instance.Method();
-	std::cout << "Passing by value";
+	std::cout << "Passing by value ";
 	std::cout << instance.GetData() << std::endl;
 }
 
 void PassingByReference(SuperExample& instance)
 {
 	instance.Method();
-	std::cout << "Passing by reference";
+	std::cout << "Passing by reference ";
 	std::cout << instance.GetData() << std::endl;
 }
 
 int main()
 {
-	SubExample subExample;
-	SuperExample * parentPointer = &subExample;
+	SubExample derivedObject;
+	SuperExample * parentPointer = &derivedObject;
 
-	subExample.Method();
+	derivedObject.Method();
 	parentPointer->Method();
 
-	PassingByValue(subExample);
-	PassingByReference(subExample);
+	PassingByValue(derivedObject);
+	PassingByReference(derivedObject);
 
 	int wait;
 	std::cin >> wait;

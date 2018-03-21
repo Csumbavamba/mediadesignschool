@@ -27,19 +27,19 @@ class Leonberger : public Dog
 
 int main()
 {
-	Sziami bObject;
-	Cat * aPointer = &bObject;
-	Cat& aReference = bObject;
+	Sziami sziamiObject;
+	Cat * catPointer = &sziamiObject;
+	Cat& catReference = sziamiObject;
 
-	std::cout << "catPointer " << typeid(*aPointer).name() << std::endl;
-	std::cout << "catReference " << typeid(aReference).name() << std::endl;
+	std::cout << "catPointer " << typeid(*catPointer).name() << std::endl;
+	std::cout << "catReference " << typeid(catReference).name() << std::endl;
 
-	Leonberger dObject;
-	Dog* cPointer = &dObject;
-	Dog& cReference = dObject;
+	Leonberger leonbergerObject;
+	Dog* dogPointer = &leonbergerObject;
+	Dog& dogReference = leonbergerObject;
 
-	std::cout << "dogPointer " << typeid(*cPointer).name() << std::endl;
-	std::cout << "dogReference " << typeid(cReference).name() << std::endl;
+	std::cout << "dogPointer " << typeid(*dogPointer).name() << std::endl;
+	std::cout << "dogReference " << typeid(dogReference).name() << std::endl;
 
 	int wait;
 	std::cin >> wait;

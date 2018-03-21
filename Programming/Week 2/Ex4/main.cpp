@@ -50,7 +50,7 @@ int main()
 
 	for (int i = 0; i < rows; ++i)
 	{
-		for (int j = 0; j < rows; ++j)
+		for (int j = 0; j < columns; ++j)
 		{
 			cout << "Enter the value for row: " << i + 1;
 			cout << " and column: " << j + 1 << " :\t";
